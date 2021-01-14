@@ -80,7 +80,10 @@ class Window:
         # Show the plot
         # In non-interative mode, this enters the matplotlib event loop
         # In interactive mode, this call does not block
-        plt.show()
+        else:
+            plt.show()
+            # pass
+
 
     def close(self):
         """

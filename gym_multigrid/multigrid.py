@@ -7,6 +7,7 @@ from gym.utils import seeding
 from .rendering import *
 from .window import Window
 import numpy as np
+import time
 
 # Size in pixels of a tile in the full-scale human view
 TILE_PIXELS = 32
@@ -1252,7 +1253,7 @@ class MultiGridEnv(gym.Env):
         done = False
 
         for i in order:
-
+            # print(i, actions[i])
             if self.agents[i].terminated or self.agents[i].paused or not self.agents[i].started or actions[i] == self.actions.still:
                 continue
 
@@ -1305,7 +1306,8 @@ class MultiGridEnv(gym.Env):
             # Done action (not used by default)
             elif actions[i] == self.actions.done:
                 pass
-
+            elif actions[i] == None:
+                pass
             else:
                 assert False, "unknown action"
 
@@ -1390,9 +1392,9 @@ class MultiGridEnv(gym.Env):
                 self.window.close()
             return
 
-        if mode == 'human' and not self.window:
-            self.window = Window('gym_multigrid')
-            self.window.show(block=False)
+        # if mode == 'human' and not self.window:
+        #     self.window = Window('gym_multigrid')
+        #     self.window.show(block=False)
 
         if highlight:
 
@@ -1436,7 +1438,8 @@ class MultiGridEnv(gym.Env):
             highlight_masks=highlight_masks if highlight else None
         )
 
-        if mode == 'human':
-            self.window.show_img(img)
+        # if mode == 'human':
+        #     self.window.show_img(img)
 
+        # time.sleep(0)
         return img
